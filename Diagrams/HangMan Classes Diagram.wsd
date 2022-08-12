@@ -1,0 +1,54 @@
+@startuml Hangman
+
+    class hangman{
+        object_id
+    }
+
+    class turn{
+        object_id
+        --
+        game_finished boolean
+        player1(#) player_turn
+        player2(#) player_turn
+        winner(#) player
+        losser(#) player
+    }
+
+    class player{
+        object_id
+        --
+        text name
+    }
+
+    class player_turn{
+        object_id
+        --
+        player(#) player
+        role(#) role
+        number failed_attempts
+    }
+
+    class letter{
+        object_id
+        --
+        char letter
+        boolean is_shown
+        number position
+    }
+
+    class role{
+        object_id
+        --
+        text role
+    }
+
+    hangman *-- turn : DSU_REFERENCE
+
+    turn *-- player_turn 
+
+    player_turn *-- player
+    player_turn *-- role
+
+    turn *-- letter : DSU_REFERENCE
+
+@enduml
